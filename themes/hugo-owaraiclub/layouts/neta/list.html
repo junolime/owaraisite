@@ -1,0 +1,42 @@
+{{ define "main" }}
+
+<div class="article-container">
+    <div class="article-rightbar">
+        <div class="article-rightbar-child">
+            <h1><a href="/{{ .Data.Plural }}"> {{.Section}}</a>/{{.Title}}</h1>
+            <div class="article-content">
+            {{ if gt (len .Content) 0 }}
+
+              {{ .Content }}
+
+            {{ end}}
+
+            </div>
+
+            {{ partial "wiki_summary.html" . }}
+        </div>
+    </div>
+    <div class="article-metamain shadowbox">
+
+        {{ range .Data.Pages.GroupByDate "2006-01" }}
+
+        <section class="accordion">
+            
+
+            <input type="checkbox" name="collapse" id="handle{{.Key}}">
+            <h2 class="handle" id="{{.Key}}">
+            <label for="handle{{.Key}}">{{.Key}}</label>
+            </h2>
+            <div class="content">
+                <table>
+                {{ range .Pages }}
+                {{ partial "article_table_neta.html" .}}
+                {{end}}
+                </table>
+            </div>         
+        </section>     
+        {{ end }}   
+    </div>
+</div>
+{{ end }}
+

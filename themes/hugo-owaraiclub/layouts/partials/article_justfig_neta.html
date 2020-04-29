@@ -1,0 +1,17 @@
+<section class="flex-col">
+
+<a href="{{ .Permalink }}">
+{{ $img := findRE "<img src=\"[^\"]+\"" .Content 1 }} 
+
+{{ range $img }}
+
+ <div>{{ (print . "class=\"article-img2\" alt=\"Thumbnail\" />") | safeHTML }}</div>
+
+{{ end }}
+</a>
+<span>{{ .Title }}</span>
+
+{{ if .Params.combi }}
+<span>{{ .Params.combi }}</span>
+{{ end }}
+</section>

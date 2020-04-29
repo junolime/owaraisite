@@ -1,7 +1,7 @@
 baseurl = "/"
 languageCode = "en-us"
 title = "笑神本部"
-theme = "hugo-xmag"
+theme = "hugo-owaraiclub"
 googleAnalytics = "UA-107230532-1"
 disqusShortname = "owarai"
 ignoreFiles = ["\\.Rmd$", "_files$", "_cache$"]
@@ -9,66 +9,103 @@ preserveTaxonomyNames = true
 footnotereturnlinkcontents = "↩"
 hasCJKLanguage = true
 enableEmoji = true
-paginate = 12
+paginate = 20
+enableGitInfo = true
+disablePathToLower = true
 
-[permalinks]
-    post = "/post/:year/:month/:day/:slug/"
-
-
-[[menu.main]]
-    name = "订阅"
-    url = "/index.xml"
-    weight = 2
-[[menu.main]]
-    name = "加入我们"
-    url = "/joinus/"
-    weight = 6
-[[menu.main]]
-    name = "字幕组简介"
-    url = "/fansub/"
-    weight = 5
-[[menu.main]]
-    name = "转载规则"
-    url = "/rules/"
-    weight = 3
+refLinksErrorLevel = "WARNING"
+refLinksNotFoundURL = '#'
 
 
-[[menu.top]]
-    name = "首页"
-    url = "/"
+
+[[menu.side]]
+    name = "搜索"
+    url = "/search/"
     weight = 1
-[[menu.top]]
-    name = "分类"
-    url = "/categories/"
+
+[[menu.side]]
+    name = "节目"
+    url = "/post/"
+    weight = 2
+[[menu.side]]
+    name = "段子"
+    url = "/neta/"
     weight = 3
-[[menu.top]]
+[[menu.side]]
+    name = "论坛"
+    url = "http://35.221.198.211"
+    weight = 4
+[[menu.side]]
+    name = "百科"
+    url = "/wiki/"
+    weight = 5
+[[menu.side]]
+    name = "最近一周"
+    url = "/lastweek/"
+    weight = 6
+[[menu.side]]
     name = "标签"
     url = "/tags/"
-    weight = 4
-[[menu.top]]
-    name = "作品"
-    url = "/post/"
-    weight = 5
-[[menu.top]]
-    name = "文章"
-    url = "/blog/"
-    weight = 6
-
+    weight = 9
+[[menu.side]]
+    name = "字幕组"
+    url = "/author/"
+    weight = 10
+[[menu.side]]
+    name = "转载规则"
+    url = "/rules/"
+    weight = 12
 
 
 [params]
+
     description = "笑神本部"
     summary_length = 2
     github_edit = "https://github.com/tcgriffith/owaraisite/blob/master/content/"
-    footer = "Powered by [Hugo](https://gohugo.io/), [blogdown](https://github.com/rstudio/blogdown) & [netlify](https://www.netlify.com/) &copy; [OWARAICLUB](https://owarai.netlify.com/) 2017"
+    footer = "Powered by [Hugo](https://gohugo.io/), [blogdown](https://github.com/rstudio/blogdown) & [netlify](https://www.netlify.com/) &copy; [OWARAICLUB](https://owarai.netlify.com/) 2017-2019"
+    comment = true
+    mainSections = ["post", "neta", "matome"]
+    mainBangumis = ["伦敦之心", "神舌", "ametalk"]
+    otherbangumis2 = ["其他", "cut","matome", "节目表"]    
+    otherbangumis = ["段子", "其他", "cut"]
+    othertags=["漫才", "短剧", "神舌","ametalk", "男女纠察队"]
+    flarumurl="https://d.owaraiclub.com/api/discussions?filter[q]=tag:whatsnew"
+    flarum="https://d.owaraiclub.com/d/"
+
+
+
+# autolink magic
+[[params.autolink]]
+    replace = "\\s(av\\d+)\\s"
+    with = "<a href='https://www.bilibili.com/video/$1'>$1</a>"
+
+[[params.autolink]]
+    replace = "@(.*?)\\s"
+    with = "<a href='/author/$1'>@$1</a>"
+
+
+
 
 [params.text]
     back = "&larr; 返回首页"
-    edit = "编辑此页"
+    edit = "&#9988;  编辑本页"
     truncated = "&hellip;"
-    tags = " "
-    about_author = " "
+    tags = "标签"
+    combi = "搞笑艺人组合"
+    bangumi="节目"
+    about_author = "关于作者"
+    author_delimiter= "&#x1F575 "
+    sharetitle = "来自笑神本部"
 
 [params.banner]
-    src = "/img/logo.png"
+    src = "/img/logo_lh_main.svg"
 
+[taxonomies]
+  tag = "tags"
+  category = "categories"
+  bangumi = "bangumis"
+  combi = "combi"
+  author = "author"
+  
+[outputs]
+  home = ["HTML", "JSON","RSS"]

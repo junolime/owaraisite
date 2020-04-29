@@ -1,0 +1,38 @@
+{{ define "main" }}
+<div class="article-container">
+    <div class="article-rightbar">
+        <div class="article-rightbar-child  ">
+            {{ partial "author_card.html" .}}
+        </div>
+        <div class="article-rightbar-child container1em">
+            <h1><a href="/{{ .Data.Plural }}"> {{.Section}}</a>/{{.Title}}</h1>
+            {{ if gt (len .Content) 0 }}
+            {{ .Content }}
+            {{ end}}
+        </div>
+
+    </div>
+
+
+
+    <div class="article-metamain shadowbox">
+
+        <div class = "roundit  container1em shadowbox halloffame ">
+            <h1 > (*❦ω❦)ノ</h1>   
+            <main class="list">
+
+            {{ range   ( ( where .Site.RegularPages.ByDate ".Params.recomm" "!=" nil)) }}
+             
+                    {{ partial "article_justfig_recomm.html" . }} 
+             
+            {{ end }}
+            </main>      
+        </div>
+    </div>
+</div>
+{{ end }}
+
+
+{{ define "parallax_bg" }}
+{{ partial "parallax_regular.html" . }}
+{{ end }}

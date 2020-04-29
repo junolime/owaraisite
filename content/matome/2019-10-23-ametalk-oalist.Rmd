@@ -1,0 +1,73 @@
+---
+title: "AMETALK节目表"
+author: "疾了个风"
+date: '2019-10-24'
+categories: 疾了个风
+bangumis:
+- 节目表
+- ametalk
+draft: no
+minimo: yes
+publishdate: '2019-10-24'
+recomm: '> 节目表'
+slug: ametalk-oalist
+tags:
+- matome
+- ametalk
+bangumi: 节目表
+weight: '`r (210000 - as.numeric(format(Sys.Date(),"%y%m%d")))`'
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(dplyr)
+library(DT)
+library(lubridate)
+load("~/GIT/lhdata/data/ame_list.cln.rda")
+```
+
+
+![](https://raw.githubusercontent.com/tcgriffith/owaraisite/master/static/img/ametalk.jpg)
+
+
+
+## 简介
+
+
+> 还有一个就是希望能有有完整的合集目录，即使当前那一期没有字幕，甚至没有资源，只需要有标题介绍也行啊，这样也心里有个数啊哈哈哈
+
+
+于是就把把日文维基上的播放表扒下来，将已知的熟肉尽力map上。
+
+另外其实好多档字幕组自己也没留所以能不能找到就随缘了啊哈哈哈
+
+
+[CSV下载](/ametalk.csv)
+
+
+```{r}
+
+ame_list.cln2 =
+ame_list.cln %>%
+  as_tibble() %>%
+  mutate(date= publishdate,
+         title = ifelse(is.na(title.y), "", paste0("</br><a href=\"/post/",slug,"\">熟肉 ", title.y,"</a>")),
+         title2=paste0(title.x, title)) %>%
+  mutate(link.y = ifelse(is.na(slug),NA,paste0())) %>%
+  # select(date, id=a, title=title2, guest=d, link) %>%
+  select(date, title=title2, guest=summary) %>%
+  arrange(desc(date))
+
+readr::write_csv2(ame_list.cln, path= here::here("static/ametalk.csv"))
+
+row.names(ame_list.cln2) =NULL
+
+  DT::datatable(
+    ame_list.cln2,
+    rownames = FALSE,
+    escape= FALSE,
+    extensions = 'Responsive')
+```
+
+

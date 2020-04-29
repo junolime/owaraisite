@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+{{- partial "head.html" . -}}
+{{ partial "sidebar.html" .}}
+{{- partial "header" . -}}
+
+<body>
+    <div id="universe" class="parallax">
+        {{- block "stickynav" . }}{{- end }}
+        
+            {{- block "parallax_bg" . }}{{- end }}
+            <div id="main" class="banner-layer speed-0">
+                {{- block "main" . }}{{- end }}
+
+                {{- partial "footer.html" . -}}
+            </div>        
+    </div>
+
+
+</body>
+
+
+
+</html>

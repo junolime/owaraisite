@@ -1,0 +1,34 @@
+<tr>
+    <td nowrap style="text-align:right">{{ .Params.bangumi }}</td>
+    <td ><a href="{{ .Permalink }}">{{ .Params.title }}</a></td>
+    <td nowrap>
+        {{ with .Params.author }}
+            {{ if eq (substr (jsonify .) 0 1) "["}}
+            {{ $.Scratch.Set "page_author" .}}
+            {{ else }}
+            {{ $.Scratch.Set "page_author" (slice .) }}
+            {{ end }}
+
+            {{ with $.Scratch.Get "page_author" }}
+                {{ range . }}
+                    <a href="/author/{{.}}">{{ . }}</a>
+                {{ end }}
+            {{ end }}
+        {{ end }}
+
+    </td>
+
+    <td>
+        {{ .Date.Format "20060102" }}
+    </td>
+
+    <td>
+        {{ if .Params.recomm }}
+          {{ .Params.recomm |markdownify}}
+        {{ else }}
+           test 
+        {{ end }}
+    </td>
+
+
+</tr>

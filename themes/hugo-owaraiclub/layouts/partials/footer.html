@@ -1,0 +1,17 @@
+
+
+<footer>
+
+<div class="footer">
+  <div class="footermenu">
+      <ul class="menu-bottom">
+        {{ range .Site.Menus.side }}
+        <a href="{{ .URL | relURL }}">
+        <li><span data-hover="{{ .Name }}">{{ .Name }}</span></li></a>
+        {{ end }}
+      </ul>
+  </div>
+</div>
+</footer>
+
+{{ template "_internal/google_analytics.html" . }}

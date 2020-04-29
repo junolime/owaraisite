@@ -1,0 +1,71 @@
+---
+title: 神舌节目表
+author: 疾了个风
+date: '2019-10-23'
+publishdate: '2019-10-23'
+slug: godtongue-oalist
+categories:
+  - 疾了个风
+tags:
+  - matome
+minimo: true
+bangumi: 节目表
+bangumis:
+  - 神舌
+  - 节目表
+weight: '`r (210000 - as.numeric(format(Sys.Date(),"%y%m%d")))`'
+draft: false
+recomm: "> 节目表"
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(dplyr)
+library(DT)
+library(lubridate)
+load("~/GIT/lhdata/data/godtongue_list_cln.rda")
+```
+
+
+![](https://raw.githubusercontent.com/tcgriffith/owaraisite/master/static/img/godtongue.jpg)
+
+
+
+## 简介
+
+
+> 还有一个就是希望能有有完整的合集目录，即使当前那一期没有字幕，甚至没有资源，只需要有标题介绍也行啊，这样也心里有个数啊哈哈哈
+
+
+于是就把把日文维基上的播放表扒下来，将已知的熟肉尽力map上。
+
+另外其实好多档字幕组自己也没留所以能不能找到就随缘了啊哈哈哈
+
+
+[CSV下载](/godtongue.csv)
+
+
+```{r}
+godtong_list.cln2 = 
+godtong_list.cln %>%
+  as_tibble() %>%
+  mutate(date= publishdate,
+         title = ifelse(is.na(title), "", paste0("</br>熟肉 ", title,"")),
+         title2=paste0(c, title)) %>%
+  select(date, id=a, title=title2, guest=d, link) %>%
+  arrange(desc(date))
+
+readr::write_csv2(godtong_list.cln, path= here::here("static/godtongue.csv"))
+  
+# godtong_list.cln2 %>%
+#   DT::datatable(escape= FALSE) %>%
+#   formatStyle(c("title","date"), "white-space"="nowrap")
+
+  DT::datatable(
+    godtong_list.cln2,
+    rownames = FALSE,
+    escape= FALSE,
+    extensions = 'Responsive')
+```
+
